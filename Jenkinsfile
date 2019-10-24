@@ -18,7 +18,7 @@ node {
     }
     stage('Build image') {
         /* This builds the actual image */
-        app = docker.build("manonair/angularapp")
+        app = docker.build("manonair/angulardocker")
     }
     stage('Test image') {       
         app.inside {
