@@ -18,7 +18,7 @@ node {
     }
     stage('Build image') {
         /* This builds the actual image */
-        app = docker.build("manonair/angularapp")
+        app = docker.build("manonair/dockerized-angularapp")
     }
     stage('Test image') {       
         app.inside {
@@ -37,14 +37,14 @@ node {
     }
   stage("Deploy") {
     try{
-          sh "docker stop angulardocker && \
-          docker rm angulardocker"
+          sh "docker stop dockerized-angularapp && \
+          docker rm dockerized-angularapp"
     } catch(e) {
            echo e.toString()
     }
     echo "Clean up completed"
-    sh "docker pull manonair/angulardocker && \
-        docker run -d --name=angulardocker -p 8084:80 manonair/angulardocker"
+    sh "docker pull manonair/dockerized-angularapp && \
+        docker run -d --name=dockerized-angularapp -p 8084:80 manonair/dockerized-angularapp"
     echo "completed deployment "
   }
   
